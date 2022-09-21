@@ -1,0 +1,67 @@
+<section class="faq_sec py" style="background-color: {{ section.settings.bgcolor }};">
+  <div class="page-width">
+  <div class="accordion_container">
+  {% if section.settings.section_heading != blank %}
+    <div class="section-header text-center">
+      <h2>{{ section.settings.section_heading }}</h2>
+    </div>
+  {% endif %}
+  {% if section.settings.sub_heading_faq != blank %}
+  <div class="sub_heading_faq text-center">
+    {{ section.settings.sub_heading_faq }}
+  </div>
+  {% endif %}
+  {%- for block in section.blocks -%}
+  {% if block.settings.title != blank %}
+  <div class="accordion_head"><div class="expand-bar"></div><h2>{{ block.settings.title }}</h2></div>
+  {% endif %}
+  {% if block.settings.answer != blank %}
+  <div class="accordion_body" style="display: none;">
+    {{ block.settings.answer }}
+  </div>
+  {% endif %}
+  {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Faq",
+    "settings": [
+		{
+             "type": "color",
+             "id": "bgcolor",
+             "label": "Background Color"
+        },
+		{
+            "type": "textarea",
+            "id": "section_heading",
+            "label": "Heading"
+        },
+		{
+            "type": "textarea",
+            "id": "sub_heading_faq",
+            "label": "Sub Heading"
+        }
+],
+    "blocks": [
+      {
+        "type": "question",
+        "name": "Question",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Question"
+          },
+          {
+            "type": "html",
+            "id": "answer",
+            "label": "Answer"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
